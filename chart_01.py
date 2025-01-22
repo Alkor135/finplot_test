@@ -60,22 +60,22 @@ def volume_stops(df):
         if (df['volume'][i - 2] < df['volume'][i - 1] < df['volume'][i] and
                 df['open'][i - 2] >= df['close'][i - 2] and df['open'][i - 1] >= df['close'][i - 1] and
                 df['open'][i] <= df['close'][i]):
-            df.at[i, 'long1'] = df['low'][i] - 30
+            df.at[i, 'long1'] = df['low'][i] - 40
 
         if (df['volume'][i - 2] < df['volume'][i - 1] < df['volume'][i] and
                 df['open'][i - 2] <= df['close'][i - 2] and df['open'][i - 1] <= df['close'][i - 1] and
                 df['open'][i] >= df['close'][i]):
-            df.at[i, 'short1'] = df['high'][i] + 30
+            df.at[i, 'short1'] = df['high'][i] + 40
 
         if (df['volume'][i - 2] > df['volume'][i - 1] > df['volume'][i] and
                 df['open'][i - 2] >= df['close'][i - 2] and df['open'][i - 1] >= df['close'][i - 1] and
                 df['open'][i] <= df['close'][i]):
-            df.at[i, 'long2'] = df['low'][i] - 30
+            df.at[i, 'long2'] = df['low'][i] - 40
 
         if (df['volume'][i - 2] > df['volume'][i - 1] > df['volume'][i] and
                 df['open'][i - 2] <= df['close'][i - 2] and df['open'][i - 1] <= df['close'][i - 1] and
                 df['open'][i] >= df['close'][i]):
-            df.at[i, 'short2'] = df['high'][i] + 30
+            df.at[i, 'short2'] = df['high'][i] + 40
 
     return df
 
@@ -112,8 +112,10 @@ if __name__ == '__main__':
 
     # Volume Stops
     fplt.plot(df['datetime'], df['long1'], legend='Long 1 Max volume', style='o', color='#00f')
-    fplt.plot(df['datetime'], df['long2'], legend='Long 2 Min Volume', style='^', color='#00f')
+    # fplt.plot(df['datetime'], df['long2'], legend='Long 2 Min Volume', style='o', color='#f00')
+    # fplt.plot(df['datetime'], df['long2'], legend='Long 2 Min Volume', style='o', color='#dc143c')
+    fplt.plot(df['datetime'], df['long2'], legend='Long 2 Min Volume', style='o', color='#006400')
     fplt.plot(df['datetime'], df['short1'], legend='Short 1 Max volume', style='o', color='#00f')
-    fplt.plot(df['datetime'], df['short2'], legend='Short 2 Min Volume', style='^', color='#00f')
+    fplt.plot(df['datetime'], df['short2'], legend='Short 2 Min Volume', style='o', color='#006400')
 
     fplt.show()
