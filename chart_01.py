@@ -92,6 +92,7 @@ if __name__ == '__main__':
     # Сохранение DF в файл без индекса
     df.to_csv(fr'alf_vs.csv', index=False)
     print(df)
+    print(len(df))
 
     # create two axes
     ax = fplt.create_plot('RTS', rows=1)
