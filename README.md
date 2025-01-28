@@ -15,5 +15,8 @@ pip install pytz==2020.4
 pip install six==1.15.0
 pip install PyQt5-sip==12.8.1
 ```  
+  
+
+![img.png](img.png)
 
 
