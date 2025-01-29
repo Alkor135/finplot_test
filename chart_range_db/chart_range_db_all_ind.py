@@ -123,6 +123,10 @@ if __name__ == '__main__':
     # Укажите путь к вашей базе данных SQLite
     db_path = Path(r'C:\Users\Alkor\gd\data_quote_db\RTS_Range.db')
 
+    # Создаем список настроек индикаторов ALF
+    alpha_lst = np.arange(0.30, 0.40, 0.01).tolist()
+    alpha_lst = [round(alpha, 2) for alpha in alpha_lst]  # Округление значений списка
+
     # Установите соединение с базой данных
     conn = sqlite3.connect(db_path)
 
@@ -141,9 +145,7 @@ if __name__ == '__main__':
     # print(df)
 
     # Добавление индикатора ALF
-    alpha_lst = [0.35, 0.36, 0.37, 0.38, 0.39, 0.4, 0.41, 0.42, 0.43, 0.44, 0.45]
     for alpha in alpha_lst:
-    # for alpha in range(0.30, 0.40, 0.01):
         df = adaptive_laguerre_filter(df, alpha=alpha)
 
     df = volume_stops(df)
