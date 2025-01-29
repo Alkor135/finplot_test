@@ -148,7 +148,10 @@ if __name__ == '__main__':
     for alpha in alpha_lst:
         df = adaptive_laguerre_filter(df, alpha=alpha)
 
+    # Добавление индикатора VolumeStops
     df = volume_stops(df)
+
     print(df)
 
+    # Создание графика
     chart_range(df, alpha_lst)
