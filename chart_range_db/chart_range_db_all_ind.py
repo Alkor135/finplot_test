@@ -120,29 +120,27 @@ def chart_range(df, alpha_lst):
 
 
 if __name__ == '__main__':
-    # Укажите путь к вашей базе данных SQLite
+    # Путь к базе данных SQLite
     db_path = Path(r'C:\Users\Alkor\gd\data_quote_db\RTS_Range.db')
 
     # Создаем список настроек индикаторов ALF
     alpha_lst = np.arange(0.30, 0.40, 0.01).tolist()
     alpha_lst = [round(alpha, 2) for alpha in alpha_lst]  # Округление значений списка
 
-    # Установите соединение с базой данных
+    # Установка соединения с базой данных
     conn = sqlite3.connect(db_path)
 
+    # Запрос на таблицы в базе данных
     query = "SELECT name FROM sqlite_master WHERE type='table'"
+    # Получение имени первой таблицы из БД
     table = pd.read_sql_query(query, conn).iloc[0, 0]
-    # print(table)
 
-    # Выполните SQL-запрос и загрузите результаты в DataFrame
-    query = f"SELECT * FROM {table}"  # Замените 'your_table_name' на имя вашей таблицы
+    # Выполнение SQL-запроса и загрузка результата в DataFrame
+    query = f"SELECT * FROM {table}"
     df = pd.read_sql_query(query, conn)
 
-    # Закройте соединение
+    # Закрытие соединения
     conn.close()
-
-    # # Проверьте данные
-    # print(df)
 
     # Добавление индикатора ALF
     for alpha in alpha_lst:
