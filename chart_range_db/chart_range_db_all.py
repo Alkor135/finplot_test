@@ -9,7 +9,8 @@ fplt.display_timezone = timezone.utc  # Настройка тайм зоны, ч
 
 
 def chart_range(df):
-    df['datetime'] = pd.to_datetime(df['datetime'])  # Меняем тип данных в колонке
+    # Меняем тип данных в колонке
+    df['datetime'] = pd.to_datetime(df['datetime'])
 
     # create two axes
     ax = fplt.create_plot('RTS', rows=1)
@@ -39,13 +40,13 @@ if __name__ == '__main__':
     # print(table)
 
     # Выполните SQL-запрос и загрузите результаты в DataFrame
-    query = f"SELECT * FROM {table}"  # Замените 'your_table_name' на имя вашей таблицы
+    query = f"SELECT * FROM {table}"
     df = pd.read_sql_query(query, conn)
 
     # Закройте соединение
     conn.close()
 
-    # # Проверьте данные
-    # print(df)
+    # Проверьте данные
+    print(df)
 
     chart_range(df)
