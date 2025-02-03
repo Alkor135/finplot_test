@@ -1,6 +1,7 @@
 import sqlite3
 from pathlib import Path
 from datetime import timezone
+import re
 
 import pandas as pd
 import finplot as fplt
@@ -45,6 +46,14 @@ if __name__ == '__main__':
 
     # Закройте соединение
     conn.close()
+
+    # Фильтрация df
+    # Регулярное выражение с незахватывающей группой (?:)
+    pattern = r'(?:10:00:00|10:00:01|19:00:00|19:00:01|19:05:00|19:05:01)'
+    # Фильтрация строк (удаляем строки с совпадением)
+    df = df[~df['datetime'].str.contains(pattern, regex=True)]
+    # Сброс индекса (переиндексация)
+    df = df.reset_index(drop=True)
 
     # Проверьте данные
     print(df)
