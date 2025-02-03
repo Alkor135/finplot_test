@@ -1,7 +1,6 @@
 import sqlite3
 from pathlib import Path
 from datetime import timezone
-import re
 
 import pandas as pd
 import finplot as fplt

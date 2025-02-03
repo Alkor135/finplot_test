@@ -142,6 +142,14 @@ if __name__ == '__main__':
     # Закрытие соединения
     conn.close()
 
+    # Фильтрация df
+    # Регулярное выражение с незахватывающей группой (?:)
+    pattern = r'(?:10:00:00|10:00:01|19:00:00|19:00:01|19:05:00|19:05:01)'
+    # Фильтрация строк (удаляем строки с совпадением)
+    df = df[~df['datetime'].str.contains(pattern, regex=True)]
+    # Сброс индекса (переиндексация)
+    df = df.reset_index(drop=True)
+
     # Добавление индикатора ALF
     for alpha in alpha_lst:
         df = adaptive_laguerre_filter(df, alpha=alpha)
@@ -149,6 +157,7 @@ if __name__ == '__main__':
     # Добавление индикатора VolumeStops
     df = volume_stops(df)
 
+    # print(df.columns.values)
     print(df)
 
     # Создание графика
